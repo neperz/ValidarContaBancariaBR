@@ -53,6 +53,8 @@
     <Compile Include="ErroBanco.cs" />
     <Compile Include="GenericBankAccountValidator.cs" />
     <Compile Include="HSBCValidator.cs" />
+    <Compile Include="ItauCheckNumberCalculator.cs" />
+    <Compile Include="ItauValidator.cs" />
     <Compile Include="IValidator.cs" />
     <Compile Include="Validador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
