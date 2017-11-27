@@ -16,14 +16,15 @@ namespace ValidadorDeCC.Domain
                 { "237",new  BradescoValidator() },
                 { "745", new CitibankValidator() },
                 {"399", new  HSBCValidator ()},
-                {"341", new  ItauValidator() }
+                {"341", new  ItauValidator() },
+                {"033", new  SantanderValidator() }
 
 
                 };
 
-            ItauValidator cb = new ItauValidator();
+           
             /*
-
+ SantanderValidator cb = new SantanderValidator();
         "237", BradescoValidator,
         "341", ItauValidator,
         "033", SantanderValidator,

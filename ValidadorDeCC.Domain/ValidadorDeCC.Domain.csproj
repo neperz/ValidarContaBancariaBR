@@ -56,6 +56,7 @@
     <Compile Include="ItauCheckNumberCalculator.cs" />
     <Compile Include="ItauValidator.cs" />
     <Compile Include="IValidator.cs" />
+    <Compile Include="SantanderValidator.cs" />
     <Compile Include="Validador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
