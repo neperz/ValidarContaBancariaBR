@@ -1,4 +1,4 @@
-# ValidarContaBancariaBR
+# Validar Contas Bancarias BR
 Validar contas bancarias do Brasil
 
 Projeto baseado no https://github.com/moip/bank-account-validator-js versao C#
