@@ -23,13 +23,16 @@ Bradesco
 Ag: 3001-5
 cc: 0140555-1
              */
-            var nCodBanco = "104";
+            var nCodBanco = "070";
 
-            var nAgencia = "2004";
+            var nAgencia = "057";
             var dvAgencia = "";
 
-            var nConta = "00100000448";
+            var nConta = "032830";
             var dvConta = "6";
+
+            var nLogista = NuLojistaComDigito(nConta);
+
             var b = new BankAccount();
             ContaBanco cc = new ContaBanco
             {
@@ -58,7 +61,48 @@ cc: 0140555-1
             var dvContaValida = CommonBankAccountValidator.accountCheckNumberIsValid(dvConta);
             Assert.AreEqual(true, dvContaValida);
         }
+        /// <summary>
+        /// Cálculo do dv do número do lojista
+        /// </summary>
+        /// <param name="dsNumero"></param>
+        /// <returns></returns>
+        public decimal NuLojistaComDigito(string dsNumero)
+        {
+            var length = dsNumero.Length;
+            var BRBnumberstring = dsNumero.ToCharArray();
+            var BRBnumberList = BRBnumberstring.Select(c => Convert.ToInt32(c.ToString()));
+            int sum = 0;
+            int dv = 0;
+            int[] reversedCCnumber = BRBnumberList.Reverse().ToArray();
+            int contador = 0;
+            for (int i = 0; i < length; i++)
+            {
+                contador++;
+                var n = reversedCCnumber[i];
+                if (contador % 2 == 0)
+                {
+                    sum += n;
 
+                }
+                else
+                {
+                    var produto = n * 2;
+                    var cProduto = produto.ToString().ToCharArray();
+                    var nProduto = cProduto.Select(c => Convert.ToInt32(c.ToString()));
+                    var dProduto = nProduto.Sum();
+
+                    sum += dProduto;
+                }
+            }
+            if (sum % 10 == 0)
+                dv = 0;
+            else
+            {
+                var proximaDezenaCheia = (Math.Floor((decimal)sum / 10) + 1) * 10;
+                dv = Convert.ToInt32(proximaDezenaCheia) - sum;
+            }
+            return Convert.ToInt32(dsNumero + dv.ToString());
+        }
         [TestMethod()]
         public void agencyNumberIsValidTest()
         {
