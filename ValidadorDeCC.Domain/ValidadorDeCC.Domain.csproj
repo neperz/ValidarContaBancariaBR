@@ -47,6 +47,8 @@
     <Compile Include="BanrisulValidator.cs" />
     <Compile Include="BradescoCheckNumberCalculator.cs" />
     <Compile Include="BradescoValidator.cs" />
+    <Compile Include="CaixaEconimicaValidator.cs" />
+    <Compile Include="CEFCheckNumberCalculator.cs" />
     <Compile Include="CitibankValidator.cs" />
     <Compile Include="CommonBankAccountValidator.cs" />
     <Compile Include="ContaBanco.cs" />

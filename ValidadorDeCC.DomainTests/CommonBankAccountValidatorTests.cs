@@ -23,11 +23,13 @@ Bradesco
 Ag: 3001-5
 cc: 0140555-1
              */
-            var nAgencia = "3001p";
-            var dvAgencia = "5";
+            var nCodBanco = "104";
 
-            var nConta = "0140555";
-            var dvConta = "1";
+            var nAgencia = "2004";
+            var dvAgencia = "";
+
+            var nConta = "00100000448";
+            var dvConta = "6";
             var b = new BankAccount();
             ContaBanco cc = new ContaBanco
             {
@@ -35,7 +37,7 @@ cc: 0140555-1
                 accountNumber = nConta,
                 agencyCheckNumber = dvAgencia,
                 agencyNumber = nAgencia,
-                bankNumber = "237"
+                bankNumber = nCodBanco
             };
             var nb = b.validate(cc);
 
