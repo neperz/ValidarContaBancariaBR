@@ -14,15 +14,6 @@ namespace ValidadorDeCC.Domain.Tests
         [TestMethod()]
         public void BancoDoBrasilCheckNumberCalculatorTest()
         {
-            /*
-Banrisul
-Ag.: 0218 c/c.: 3501514701
-Ag.: 0590 c/c.: 0805093703          
-
-Bradesco
-Ag: 3001-5
-cc: 0140555-1
-             */
             var nCodBanco = "070";
 
             var nAgencia = "057";
@@ -31,10 +22,8 @@ cc: 0140555-1
             var nConta = "032830";
             var dvConta = "6";
 
-            var nLogista = NuLojistaComDigito(nConta);
-
-            var b = new BankAccount();
-            ContaBanco cc = new ContaBanco
+            var ValidadorDeConta = new BankAccount();
+            ContaBanco contaBanco = new ContaBanco
             {
                 accountCheckNumber = dvConta,
                 accountNumber = nConta,
@@ -42,10 +31,10 @@ cc: 0140555-1
                 agencyNumber = nAgencia,
                 bankNumber = nCodBanco
             };
-            var nb = b.validate(cc);
+            var nb = ValidadorDeConta.validate(contaBanco);
 
-            var nconta = BancoDoBrasilCheckNumberCalculator.calculateAccount(nConta);
-            Assert.AreEqual(true,nb!=null);
+           
+            Assert.AreEqual(true, nb.valido);
 
         }
         [TestMethod()]
