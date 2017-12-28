@@ -43,7 +43,7 @@ namespace ValidadorDeCC.Domain
             }
         }
 
-        public ContaBanco validate(ContaBanco banco)
+        public ContaBanco validate(ContaBanco banco, bool skipAgencyValidation=false )
         {
             ContaBanco bancoValidado = new ContaBanco();
             GenericBankAccountValidator gv = new GenericBankAccountValidator();
@@ -58,17 +58,18 @@ namespace ValidadorDeCC.Domain
                 {
                     errors.Add(new ErroBanco { description = "Banco inválido", code = "INVALID_BANK_NUMBER" });
                 }
-
-                if (!validator.agencyNumberIsValid(banco.agencyNumber))
+                if (skipAgencyValidation == false)
                 {
-                    errors.Add(new ErroBanco { description = validator.agencyNumberMsgError(0), code = "INVALID_AGENCY_NUMBER" });
-                }
+                    if (!validator.agencyNumberIsValid(banco.agencyNumber))
+                    {
+                        errors.Add(new ErroBanco { description = validator.agencyNumberMsgError(0), code = "INVALID_AGENCY_NUMBER" });
+                    }
 
-                if (!validator.agencyCheckNumberIsValid(banco.agencyCheckNumber))
-                {
-                    errors.Add(new ErroBanco { description = validator.agencyCheckNumberMsgError(), code = "INVALID_AGENCY_CHECK_NUMBER" });
+                    if (!validator.agencyCheckNumberIsValid(banco.agencyCheckNumber))
+                    {
+                        errors.Add(new ErroBanco { description = validator.agencyCheckNumberMsgError(), code = "INVALID_AGENCY_CHECK_NUMBER" });
+                    }
                 }
-
                 if (!validator.accountNumberIsValid(banco.accountNumber))
                 {
                     errors.Add(new ErroBanco { description = validator.accountNumberMsgError(0), code = "INVALID_ACCOUNT_NUMBER" });
@@ -78,12 +79,14 @@ namespace ValidadorDeCC.Domain
                 {
                     errors.Add(new ErroBanco { description = "Dígito da conta corrente inválido", code = "INVALID_ACCOUNT_CHECK_NUMBER" });
                 }
-
-                if (validator.agencyNumberIsValid(banco.agencyNumber) && validator.agencyCheckNumberIsValid(banco.agencyCheckNumber))
+                if (skipAgencyValidation == false)
                 {
-                    if (!validator.agencyCheckNumberMatch(banco))
+                    if (validator.agencyNumberIsValid(banco.agencyNumber) && validator.agencyCheckNumberIsValid(banco.agencyCheckNumber))
                     {
-                        errors.Add(new ErroBanco { description = "Dígito da agência não corresponde ao número da agência preenchido", code = "AGENCY_CHECK_NUMBER_DONT_MATCH" });
+                        if (!validator.agencyCheckNumberMatch(banco))
+                        {
+                            errors.Add(new ErroBanco { description = "Dígito da agência não corresponde ao número da agência preenchido", code = "AGENCY_CHECK_NUMBER_DONT_MATCH" });
+                        }
                     }
                 }
 

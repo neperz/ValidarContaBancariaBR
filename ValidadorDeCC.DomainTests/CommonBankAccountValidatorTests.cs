@@ -5,12 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace ValidadorDeCC.Domain.Tests
 {
     [TestClass()]
     public class CommonBankAccountValidatorTests
     {
+        [TestMethod()]
+        public void GenericoRegex()
+        {
+            var referencia= "12000337045";
+            Match match = Regex.Match(referencia, @"\b[0-9]{11}\b", RegexOptions.IgnoreCase);
+            Assert.AreEqual(true, match.Success);
+        }
+        //
         [TestMethod()]
         public void BancoDoBrasilCheckNumberCalculatorTest()
         {
@@ -31,7 +40,7 @@ namespace ValidadorDeCC.Domain.Tests
                 agencyNumber = nAgencia,
                 bankNumber = nCodBanco
             };
-            var nb = ValidadorDeConta.validate(contaBanco);
+            var nb = ValidadorDeConta.validate(contaBanco,true);
 
            
             Assert.AreEqual(true, nb.valido);
